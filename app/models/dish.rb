@@ -14,10 +14,6 @@ class Dish < ApplicationRecord
              :through => :bookmarks,
              :source => :venue
 
-  has_many   :dishes,
-             :through => :bookmarks,
-             :source => :dish
-
   # Validations
 
 end
