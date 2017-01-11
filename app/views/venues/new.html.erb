@@ -45,15 +45,6 @@
         <input type="text" id="neighborhood" name="neighborhood" placeholder="Neighborhood" class="form-control" value="<%= @venue.neighborhood %>">
       </div>
 
-      <!-- Label and input for dish_id -->
-      <div class="form-group">
-        <label for="dish_id" class="control-label">
-          Dish
-        </label>
-
-        <%= select_tag(:dish_id, options_from_collection_for_select(Dish.all, :id, :name, @venue.dish_id), :class => "form-control") %>
-      </div>
-
       <button class="btn btn-success">
         Create Venue
       </button>
