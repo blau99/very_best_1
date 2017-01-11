@@ -1,41 +1,14 @@
 <div class="page-header">
   <h1>
-    Venues
-    <a href="/venues/new" class="btn btn-lg btn-success">New Venue</a>
+    Venuedishes
+    <a href="/venuedishes/new" class="btn btn-lg btn-success">New Venuedish</a>
   </h1>
 </div><div class="row mb-1">
   <div class="col-md-12">
-    <%= search_form_for @q, :class => collapse_search_form, :id => "venues_filters" do |f| %>
+    <%= search_form_for @q, :class => collapse_search_form, :id => "venuedishes_filters" do |f| %>
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
-    <%= f.label :name_cont, "Name contains" %>
-    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
-  </div>
-
-<div class="form-group">
-  <%= f.label :dish_id, "Dish" %>
-  <div class="row">
-    <div class='col-md-6 mb-1'>
-      <%= f.text_field :dish_id_gteq, :class => "form-control", :placeholder => "Dish greater than or equal to" %>
-    </div>
-    <div class='col-md-6'>
-      <%= f.text_field :dish_id_lteq, :class => "form-control", :placeholder => "Dish less than or equal to" %>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-    <%= f.label :neighborhood_cont, "Neighborhood contains" %>
-    <%= f.text_field :neighborhood_cont, :class => "form-control", :placeholder => "Neighborhood contains" %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :address_cont, "Address contains" %>
-    <%= f.text_field :address_cont, :class => "form-control", :placeholder => "Address contains" %>
-  </div>
-
-<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -75,13 +48,21 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :dish_name_cont, "Dish name contains" %>
+      <%= f.text_field :dish_name_cont, :class => "form-control", :placeholder => "Dish name contains" %>
+    </div>
+
+<div class="form-group">
+      <%= f.label :venue_name_cont, "Venue name contains" %>
+      <%= f.text_field :venue_name_cont, :class => "form-control", :placeholder => "Venue name contains" %>
+    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
-      <a href="/venues" class="btn btn-default btn-block mb-1">Clear filters</a>
+      <a href="/venuedishes" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
-    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#venues_filters">
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#venuedishes_filters">
       Show Filters
     </a>
   </div>
@@ -91,27 +72,35 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Neighborhood</th>
         <th>Dish</th>
+        <th>Venue</th>
         <th>Actions</th>
       </tr>
 
-      <% @venues.each do |venue| %>
+      <% @venuedishes.each do |venuedish| %>
       <tr>
-        <td><%= venue.name %></td>
-        <td><%= venue.address %></td>
-        <td><%= venue.neighborhood %></td>
-        <td><%= venue.dish_id %></td>
         <td>
-          <a href="/venues/<%= venue.id %>" class="btn btn-primary">Show</a>
-          <a href="/venues/<%= venue.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_venue/<%= venue.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% if venuedish.dish.present? %>
+            <a href="/dishes/<%= venuedish.dish.id %>">
+              <%= venuedish.dish.name %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if venuedish.venue.present? %>
+            <a href="/venues/<%= venuedish.venue.id %>">
+              <%= venuedish.venue.name %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <a href="/venuedishes/<%= venuedish.id %>" class="btn btn-primary">Show</a>
+          <a href="/venuedishes/<%= venuedish.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_venuedish/<%= venuedish.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
       <% end %>
     </table>
-    <%= paginate @venues, theme: 'twitter-bootstrap-4' %>
+    <%= paginate @venuedishes, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

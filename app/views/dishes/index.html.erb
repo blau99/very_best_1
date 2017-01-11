@@ -14,6 +14,18 @@
   </div>
 
 <div class="form-group">
+  <%= f.label :venue_id, "Venue" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :venue_id_gteq, :class => "form-control", :placeholder => "Venue greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :venue_id_lteq, :class => "form-control", :placeholder => "Venue less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
     <%= f.label :cuisine_cont, "Cuisine contains" %>
     <%= f.text_field :cuisine_cont, :class => "form-control", :placeholder => "Cuisine contains" %>
   </div>
@@ -58,15 +70,7 @@
           });
       </script>
 
-        <div class="form-group">
-      <%= f.label :venues_name_cont, "Venue name contains" %>
-      <%= f.text_field :venues_name_cont, :class => "form-control", :placeholder => "Venue name contains" %>
-    </div>
-
-<div class="form-group">
-      <%= f.label :venue_name_cont, "Venue name contains" %>
-      <%= f.text_field :venue_name_cont, :class => "form-control", :placeholder => "Venue name contains" %>
-    </div>
+        
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -92,13 +96,7 @@
       <tr>
         <td><%= dish.name %></td>
         <td><%= dish.cuisine %></td>
-        <td>
-          <% if dish.venue.present? %>
-            <a href="/venues/<%= dish.venue.id %>">
-              <%= dish.venue.name %>
-            </a>
-          <% end %>
-        </td>
+        <td><%= dish.venue_id %></td>
         <td>
           <a href="/dishes/<%= dish.id %>" class="btn btn-primary">Show</a>
           <a href="/dishes/<%= dish.id %>/edit" class="btn btn-warning">Edit</a>
