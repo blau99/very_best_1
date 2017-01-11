@@ -1,13 +1,13 @@
 class VenuesController < ApplicationController
   def index
     @q = Venue.ransack(params[:q])
-    @venues = @q.result(:distinct => true).includes(:bookmarks, :venuedishes).page(params[:page]).per(10)
+    @venues = @q.result(:distinct => true).includes(:dish, :bookmarks, :dishes).page(params[:page]).per(10)
 
     render("venues/index.html.erb")
   end
 
   def show
-    @venuedish = Venuedish.new
+    @dish = Dish.new
     @bookmark = Bookmark.new
     @venue = Venue.find(params[:id])
 

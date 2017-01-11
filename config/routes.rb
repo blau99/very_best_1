@@ -2,23 +2,6 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root :to => "dishes#index"
-  # Routes for the Venuedish resource:
-  # CREATE
-  get "/venuedishes/new", :controller => "venuedishes", :action => "new"
-  post "/create_venuedish", :controller => "venuedishes", :action => "create"
-
-  # READ
-  get "/venuedishes", :controller => "venuedishes", :action => "index"
-  get "/venuedishes/:id", :controller => "venuedishes", :action => "show"
-
-  # UPDATE
-  get "/venuedishes/:id/edit", :controller => "venuedishes", :action => "edit"
-  post "/update_venuedish/:id", :controller => "venuedishes", :action => "update"
-
-  # DELETE
-  get "/delete_venuedish/:id", :controller => "venuedishes", :action => "destroy"
-  #------------------------------
-
   # Routes for the Bookmark resource:
   # CREATE
   get "/bookmarks/new", :controller => "bookmarks", :action => "new"

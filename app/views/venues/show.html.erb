@@ -15,7 +15,13 @@
       <dd><%= @venue.neighborhood %></dd>
 
       <dt>Dish</dt>
-      <dd><%= @venue.dish_id %></dd>
+      <dd>
+        <% if @venue.dish.present? %>
+          <a href="/dishes/<%= @venue.dish_id %>">
+            <%= @venue.dish.name %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
@@ -90,28 +96,28 @@
   </div>
 </div>
 
-<!-- A Venue has many venuedishes -->
+<!-- A Venue has many dishes -->
 
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Venuedishes
+        Dishes
       </li>
 
-      <% @venue.venuedishes.each do |venuedish| %>
+      <% @venue.dishes.each do |dish| %>
         <li class="list-group-item">
-          <a href="/venuedishes/<%= venuedish.id %>">
-            <%= venuedish.dish_id %>
+          <a href="/dishes/<%= dish.id %>">
+            <%= dish.name %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/venuedishes/<%= venuedish.id %>" class="btn btn-primary">
+            <a href="/dishes/<%= dish.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <a href="/venuedishes/<%= venuedish.id %>/edit" class="btn btn-warning">
+            <a href="/dishes/<%= dish.id %>/edit" class="btn btn-warning">
               <i class="fa fa-edit"></i>
             </a>
-            <a href="/delete_venuedish/<%= venuedish.id %>" class="btn btn-danger" rel="nofollow">
+            <a href="/delete_dish/<%= dish.id %>" class="btn btn-danger" rel="nofollow">
               <i class="fa fa-trash-o"></i>
             </a>
           </div>
@@ -119,24 +125,33 @@
       <% end %>
 
       <li class="list-group-item">
-        <form action="/create_venuedish" method="post">
+        <form action="/create_dish" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for dish_id -->
+      <!-- Label and input for name -->
       <div class="form-group">
-        <label for="dish_id" class="control-label">
-          Dish
+        <label for="name" class="control-label">
+          Name
         </label>
 
-        <%= select_tag(:dish_id, options_from_collection_for_select(Dish.all, :id, :name), :class => "form-control") %>
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for cuisine -->
+      <div class="form-group">
+        <label for="cuisine" class="control-label">
+          Cuisine
+        </label>
+
+        <input type="text" id="cuisine" name="cuisine" placeholder="Cuisine" class="form-control" value="">
       </div>
 
       <!-- Label and input for venue_id -->
       <input type="hidden" name="venue_id" value="<%= @venue.id %>">
 
       <button class="btn btn-block btn-success">
-        Create Venuedish
+        Create Dish
       </button>
     </form>
       </li>
