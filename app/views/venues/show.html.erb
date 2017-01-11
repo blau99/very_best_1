@@ -14,6 +14,15 @@
       <dt>Neighborhood</dt>
       <dd><%= @venue.neighborhood %></dd>
 
+      <dt>Dish</dt>
+      <dd>
+        <% if @venue.dish.present? %>
+          <a href="/dishes/<%= @venue.dish_id %>">
+            <%= @venue.dish.name %>
+          </a>
+        <% end %>
+      </dd>
+
     </dl>
 
     <div class="btn-group btn-group-justified">
